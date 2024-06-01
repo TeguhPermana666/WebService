@@ -44,7 +44,7 @@ const requestListener = (request, response) =>{
     response.setHeader('Content-Type', 'text/html');
     response.statusCode = 200;
 
-    const {method} = request;
+    const {method} = request; // Get Method dengan object destructuring
 
     if(method == 'GET'){
         response.end('<h1>Hello!!</h1>');
