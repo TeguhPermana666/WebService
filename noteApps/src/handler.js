@@ -3,7 +3,7 @@ const notes = require('./notes');
 
 const addNoteHandler = (request, h) => {
     // Mengirim catatan(title,tags,body) dalam JSON melalui body request
-    const {title, logs, body} = request.payload;
+    const {title, tags, body} = request.payload;
     const id = nanoid(16);
     // variabel untuk update
     const createdAt = new Date().toISOString();
@@ -102,13 +102,14 @@ const deleteNoteByIdHandler = (request, h) => {
 
     const index = notes.findIndex((note) => note.id == id);
 
-    if(index != -1){
+    if(index !== -1){
         notes.splice(index, 1); // index, countDelete
         const response = h.response({
             status: 'success',
             message: 'Catatan berhasil dihapus',
         });
         response.code(200);
+        return response;
     }
     const response = h.response({
         status: 'fail',
